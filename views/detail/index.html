@@ -1,0 +1,46 @@
+<main id="detailPortfolio" style="opacity: 1;">
+    <a href="/" class="close-btn">
+        <span>+</span>
+    </a>
+    <div class="body-portfolio active" data-lenis-prevent>
+        <div class="content-portfolio">
+            <div class="col-left">
+                <div class="img-box">
+                    <img src="/images/port/<%= data.image %>">
+                </div>
+                <div class="spec">
+                    <p>
+                        <%= data.type %>
+                    </p>
+                    <p>
+                        <%= data.techStack %>
+                    </p>
+                    <p>
+                        <%= data.role %>
+                    </p>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="col-right">
+                <div>
+                    <h1>
+                        <%= data.title %>
+                    </h1>
+                    <p>
+                        <%= data.desc %>
+                    </p>
+                </div>
+                <p>
+                    <a href="<%= data.link %>" target="_blank">
+                        <%= data.action %>
+                            <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    viewBox="0 0 14 14" data-reveal>
+                                    <path d="M0 7.875h10.649l-4.887 4.887L7 14l7-7-7-7-1.238 1.238 4.887 4.887H0Z"
+                                        fill="currentColor"></path>
+                                </svg></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
