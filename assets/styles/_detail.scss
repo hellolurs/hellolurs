@@ -1,11 +1,12 @@
 #detailPortfolio {
-    position: fixed;
-    inset: 0;
+    // position: fixed;
+    // inset: 0;
+    height: 100dvh;
     background-color: var(--background-secondary);
     display: flex;
     padding: 10vw 10vw 0 10vw;
     z-index: 500;
-    opacity: 0;
+    // opacity: 1;
     transition: 0.5s;
     color: var(--text-color);
 
@@ -18,6 +19,10 @@
         background-color: var(--background-main);
         border-radius: 100%;
         display: flex;
+        animation-name: scaleInAnim;
+        animation-delay: 0.3s;
+        animation-duration: 0.5s;
+        animation-fill-mode: backwards;
 
         cursor: pointer;
         transition: 0.3s;
@@ -106,7 +111,13 @@
             width: 25%;
             flex-direction: column;
             justify-content: space-between;
+
             // background-color: #56A4D2;
+            &>div {
+                p {
+                    margin-bottom: 20px;
+                }
+            }
 
             h1 {
                 font-size: 36px;
@@ -141,6 +152,80 @@
 
 }
 
+
+@media screen and (max-width: 990px) {
+    #detailPortfolio {
+        .close-btn {
+            top: calc(10vw - 30px);
+            right: calc(10vw - 30px);
+        }
+
+        .body-portfolio {
+            padding: 40px;
+            padding-bottom: 0px;
+
+
+            .content-portfolio {
+                flex-direction: column;
+                width: 100%;
+
+                .col-left {
+                    width: 100%;
+                    margin-bottom: 20px;
+
+                    .spec {
+                        // flex-direction: column;
+                        flex-wrap: wrap;
+                        margin-bottom: 20px;
+                        gap: 15px;
+
+                        p {
+                            margin: 0px;
+                            padding-left: 5px;
+                        }
+
+                        p::before {
+                            content: "";
+                            width: 5px;
+                            height: 10px;
+                            background-color: #30C296;
+                            display: inline-block;
+                            transform: skewX(-35deg);
+                            margin-right: 2px;
+                            margin-bottom: 8px;
+                            margin-left: 0px;
+                        }
+                    }
+                }
+
+                .col-right {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    // background-color: #56A4D2;
+                }
+            }
+        }
+
+    }
+
+
+    .cc {
+        display: flex;
+        justify-content: flex-end;
+        // align-items: center;
+        // padding-top: 30px;
+        // padding-bottom: 30px;
+        // padding-right: 30px;
+
+        div {
+            width: 60%;
+            // height: 1px;
+            // background-color: rgba(0, 0, 0, 0.2);
+        }
+    }
+
+
+}
 
 @media screen and (max-width: 600px) {
     #detailPortfolio {
@@ -198,79 +283,5 @@
             transition: 0.5s;
         }
     }
-
-}
-
-
-@media screen and (max-width: 990px) {
-    #detailPortfolio {
-        .body-portfolio {
-            padding: 40px;
-            padding-bottom: 0px;
-
-
-            .content-portfolio {
-                flex-direction: column;
-                width: 100%;
-
-                .col-left {
-                    width: 100%;
-                    margin-bottom: 20px;
-
-                    .spec {
-                        // flex-direction: column;
-                        flex-wrap: wrap;
-                        margin-bottom: 20px;
-                        gap: 15px;
-
-                        p {
-                            margin: 0px;
-                            padding-left: 5px;
-                        }
-
-                        p::before {
-                            content: "";
-                            width: 5px;
-                            height: 10px;
-                            background-color: #30C296;
-                            display: inline-block;
-                            transform: skewX(-35deg);
-                            margin-right: 2px;
-                            margin-bottom: 8px;
-                            margin-left: 0px;
-                        }
-                    }
-                }
-
-                .col-right {
-                    width: 100%;
-                    margin-bottom: 20px;
-                    // background-color: #56A4D2;
-
-                    p {
-                        margin-bottom: 20px;
-                    }
-                }
-            }
-        }
-
-    }
-
-
-    .cc {
-        display: flex;
-        justify-content: flex-end;
-        // align-items: center;
-        // padding-top: 30px;
-        // padding-bottom: 30px;
-        // padding-right: 30px;
-
-        div {
-            width: 60%;
-            // height: 1px;
-            // background-color: rgba(0, 0, 0, 0.2);
-        }
-    }
-
 
 }

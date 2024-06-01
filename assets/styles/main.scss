@@ -223,7 +223,7 @@ body {
                 position: absolute;
                 right: -90px;
                 bottom: 16%;
-                animation-name: fadeUpAnim;
+                animation-name: heroTextInAnim;
                 animation-delay: 0.4s;
                 animation-duration: 0.5s;
                 animation-fill-mode: backwards;
@@ -287,7 +287,7 @@ body {
             mix-blend-mode: difference;
             animation-name: fadeUpAnim;
             animation-delay: 0.4s;
-            animation-duration: 0.5s;
+            animation-duration: 1s;
             animation-fill-mode: backwards;
 
             &::after {
@@ -310,8 +310,8 @@ body {
             align-items: center;
             gap: 30px;
             animation-name: fadeUpAnim;
-            animation-delay: 0.5s;
-            animation-duration: 0.5s;
+            animation-delay: 0.7s;
+            animation-duration: 1s;
             animation-fill-mode: backwards;
 
             svg {
@@ -820,6 +820,22 @@ footer {
     }
 }
 
+@keyframes fadeUpLongAnim {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @keyframes heroTextInAnim {
     0% {
         transform: translateX(-200px);
@@ -877,6 +893,20 @@ footer {
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@keyframes scaleInAnim {
+    0% {
+        scale: 0;
+    }
+
+    70% {
+        scale: 1.1;
+    }
+
+    100% {
+        scale: 1;
     }
 }
 

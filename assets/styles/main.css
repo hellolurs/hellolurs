@@ -167,7 +167,7 @@ body {
   position: absolute;
   right: -90px;
   bottom: 16%;
-  animation-name: fadeUpAnim;
+  animation-name: heroTextInAnim;
   animation-delay: 0.4s;
   animation-duration: 0.5s;
   animation-fill-mode: backwards;
@@ -211,7 +211,7 @@ body {
   mix-blend-mode: difference;
   animation-name: fadeUpAnim;
   animation-delay: 0.4s;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-fill-mode: backwards;
 }
 #hero .container .role::after {
@@ -232,8 +232,8 @@ body {
   align-items: center;
   gap: 30px;
   animation-name: fadeUpAnim;
-  animation-delay: 0.5s;
-  animation-duration: 0.5s;
+  animation-delay: 0.7s;
+  animation-duration: 1s;
   animation-fill-mode: backwards;
 }
 #hero .container .porto svg {
@@ -602,6 +602,19 @@ footer .container .content .social {
     opacity: 1;
   }
 }
+@keyframes fadeUpLongAnim {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 @keyframes heroTextInAnim {
   0% {
     transform: translateX(-200px);
@@ -650,6 +663,17 @@ footer .container .content .social {
     transform: translateY(0);
   }
 }
+@keyframes scaleInAnim {
+  0% {
+    scale: 0;
+  }
+  70% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+  }
+}
 #about {
   position: relative;
   padding: 10vw 10vw 0 10vw;
@@ -670,6 +694,10 @@ footer .container .content .social {
   transition: 0.3s;
   z-index: 501;
   text-decoration: none;
+  animation-name: scaleInAnim;
+  animation-delay: 0.2s;
+  animation-duration: 0.5s;
+  animation-fill-mode: backwards;
 }
 #about .close-btn span {
   margin: auto;
@@ -691,6 +719,10 @@ footer .container .content .social {
   padding: 88px;
   max-width: 1012px;
   margin: auto;
+  animation-name: fadeUpLongAnim;
+  animation-delay: 0.2s;
+  animation-duration: 0.7s;
+  animation-fill-mode: backwards;
 }
 #about .bodyAbout .bg {
   position: absolute;
@@ -845,13 +877,11 @@ footer .container .content .social {
   }
 }
 #detailPortfolio {
-  position: fixed;
-  inset: 0;
+  height: 100dvh;
   background-color: var(--background-secondary);
   display: flex;
   padding: 10vw 10vw 0 10vw;
   z-index: 500;
-  opacity: 0;
   transition: 0.5s;
   color: var(--text-color);
 }
@@ -864,6 +894,10 @@ footer .container .content .social {
   background-color: var(--background-main);
   border-radius: 100%;
   display: flex;
+  animation-name: scaleInAnim;
+  animation-delay: 0.3s;
+  animation-duration: 0.5s;
+  animation-fill-mode: backwards;
   cursor: pointer;
   transition: 0.3s;
   z-index: 501;
@@ -932,6 +966,9 @@ footer .container .content .social {
   flex-direction: column;
   justify-content: space-between;
 }
+#detailPortfolio .body-portfolio .col-right > div p {
+  margin-bottom: 20px;
+}
 #detailPortfolio .body-portfolio .col-right h1 {
   font-size: 36px;
   margin-bottom: 70px;
@@ -954,6 +991,55 @@ footer .container .content .social {
   width: 10%;
 }
 
+@media screen and (max-width: 990px) {
+  #detailPortfolio .close-btn {
+    top: calc(10vw - 30px);
+    right: calc(10vw - 30px);
+  }
+  #detailPortfolio .body-portfolio {
+    padding: 40px;
+    padding-bottom: 0px;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio {
+    flex-direction: column;
+    width: 100%;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio .col-left {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 15px;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec p {
+    margin: 0px;
+    padding-left: 5px;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec p::before {
+    content: "";
+    width: 5px;
+    height: 10px;
+    background-color: #30C296;
+    display: inline-block;
+    transform: skewX(-35deg);
+    margin-right: 2px;
+    margin-bottom: 8px;
+    margin-left: 0px;
+  }
+  #detailPortfolio .body-portfolio .content-portfolio .col-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .cc {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .cc div {
+    width: 60%;
+  }
+}
 @media screen and (max-width: 600px) {
   #detailPortfolio {
     padding-top: 0%;
@@ -997,53 +1083,5 @@ footer .container .content .social {
   #detailPortfolio .active {
     bottom: 0;
     transition: 0.5s;
-  }
-}
-@media screen and (max-width: 990px) {
-  #detailPortfolio .body-portfolio {
-    padding: 40px;
-    padding-bottom: 0px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio {
-    flex-direction: column;
-    width: 100%;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-left {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec {
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    gap: 15px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec p {
-    margin: 0px;
-    padding-left: 5px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-left .spec p::before {
-    content: "";
-    width: 5px;
-    height: 10px;
-    background-color: #30C296;
-    display: inline-block;
-    transform: skewX(-35deg);
-    margin-right: 2px;
-    margin-bottom: 8px;
-    margin-left: 0px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-right {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  #detailPortfolio .body-portfolio .content-portfolio .col-right p {
-    margin-bottom: 20px;
-  }
-  .cc {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .cc div {
-    width: 60%;
   }
 }/*# sourceMappingURL=main.css.map */

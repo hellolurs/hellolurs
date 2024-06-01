@@ -31,6 +31,10 @@
         transition: 0.3s;
         z-index: 501;
         text-decoration: none;
+        animation-name: scaleInAnim;
+        animation-delay: 0.2s;
+        animation-duration: 0.5s;
+        animation-fill-mode: backwards;
 
         span {
             margin: auto;
@@ -57,6 +61,11 @@
         padding: 88px;
         max-width: 1012px;
         margin: auto;
+        animation-name: fadeUpLongAnim;
+        animation-delay: 0.2s;
+        animation-duration: 0.7s;
+        animation-fill-mode: backwards;
+        // animation-timing-function: cubic-bezier(0.03, 0.98, 0.52, 0.99);
 
         .bg {
             position: absolute;

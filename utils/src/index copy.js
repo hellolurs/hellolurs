@@ -232,6 +232,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   cursorEffect();
 
   ////++++++++++SINGGLE PAGE APPLICATION++++++++++
+  const ScrollPosition = {
+    set: (x = 0, y = 0) => {
+      sessionStorage.setItem('routeScrollPos', JSON.stringify({'/': {x, y}}));
+    },
+    get: () => {
+      return JSON.parse(sessionStorage.getItem('routeScrollPos'));
+    },
+    update: (route, position = {x: 0, y: 0}) => {
+      const scrollList = ScrollPosition.get();
+    },
+  };
+
   const TransitionPage = {
     in: () => {
       const _main = document.querySelector('main');
@@ -251,6 +263,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         duration: 0.3,
       });
     },
+    home: () => {},
   };
 
   function linkNavigation() {
@@ -259,8 +272,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
       link.onclick = async (e) => {
         e.preventDefault();
 
+        window.location.pathname == '/' &&
+          ScrollPosition.set(0, window.scrollY);
+
         const url = link.getAttribute('href');
-        window.history.pushState(null, '', url);
+        window.history.pushState({route: url ?? ''}, '', url);
 
         await updatePage(url);
       };
@@ -268,14 +284,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   linkNavigation();
 
-  window.onpopstate = async () => {
+  window.onpopstate = async (e) => {
     const url = window.location.pathname;
     await updatePage(url);
   };
 
   const updatePage = async (url = '/') => {
-    //reset cursor
-    url !== '/' && cursorContainerGsapEffect();
+    //reset cursor effect
+    if (url !== '/') cursorContainerGsapEffect();
 
     return await window
       .fetch(url)
@@ -295,11 +311,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
           _targetMain.setAttribute('id', _mainId ?? '');
 
           TransitionPage.in();
-          lenis.scrollTo(0.0001);
+
           sliderPortfolio();
           linkNavigation();
           cursorEffect();
-        }, 300);
+
+          if (url == '/') {
+            // console.log(document.querySelector('.splide'));
+
+            // setTimeout(() => {
+            const historyScroll = ScrollPosition.get()[url].y;
+            console.log(historyScroll, scrollY);
+            lenis.scrollTo(historyScroll, {immediate: true});
+            // window.scrollTo(700);
+            // }, 300);
+          } else {
+            lenis.scrollTo(0.0001, {immediate: true});
+          }
+        }, 400);
       })
       .catch();
   };
