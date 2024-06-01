@@ -877,7 +877,8 @@ footer .container .content .social {
   }
 }
 #detailPortfolio {
-  height: 100dvh;
+  position: fixed;
+  inset: 0;
   background-color: var(--background-secondary);
   display: flex;
   padding: 10vw 10vw 0 10vw;

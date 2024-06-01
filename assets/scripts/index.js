@@ -274,6 +274,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   };
 
   const updatePage = async (url = '/') => {
+    // cek internet connection
+    !navigator.onLine && location.reload();
     //reset cursor
     url !== '/' && cursorContainerGsapEffect();
 
@@ -301,6 +303,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
           cursorEffect();
         }, 300);
       })
-      .catch();
+      .catch((e) => {
+        console.log(e);
+      });
   };
 });
