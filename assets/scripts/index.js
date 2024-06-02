@@ -232,6 +232,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   cursorEffect();
 
   ////++++++++++SINGGLE PAGE APPLICATION++++++++++
+  let CachePageRoutesData = {};
+
   const TransitionPage = {
     in: () => {
       const _main = document.querySelector('main');
@@ -253,6 +255,50 @@ document.addEventListener('DOMContentLoaded', (event) => {
     },
   };
 
+  async function fetchPage(url) {
+    !navigator.onLine && location.reload();
+
+    const res = await window.fetch(url);
+    // console.log(res);
+    if (res.status == 200) {
+      const container = document.createElement('html');
+      const text = await res.text();
+      container.innerHTML = text;
+
+      const _mainElement = container.querySelector('main');
+
+      return {status: res.status, page: _mainElement};
+    } else {
+      return {status: res.status, page: ''};
+    }
+  }
+
+  async function saveRouteCache(url, status, page) {
+    if (!CachePageRoutesData[url]) {
+      // console.log('new fetch', url);
+      // const hasilFetch = await fetchPage(url);
+      const _newCache = {
+        ...CachePageRoutesData,
+        [url]: {
+          status,
+          page,
+          route: url,
+        },
+      };
+      CachePageRoutesData = _newCache;
+    }
+  }
+
+  const getPage = async (url = '/') => {
+    if (CachePageRoutesData[url]) {
+      return CachePageRoutesData[url];
+    } else {
+      const hasilFetch = await fetchPage(url);
+      saveRouteCache(url, hasilFetch.status, hasilFetch.page);
+      return hasilFetch;
+    }
+  };
+
   function linkNavigation() {
     let aHrefNavigations = document.querySelectorAll('a:not([target])');
     aHrefNavigations.forEach((link) => {
@@ -261,9 +307,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         const url = link.getAttribute('href');
         window.history.pushState(null, '', url);
-
+        // console.log(CachePageRoutesData[url]);
         await updatePage(url);
       };
+
+      // link.onmouseenter = async (e) => {
+      //   const url = link.getAttribute('href');
+      //   await getPage(url);
+      // };
     });
   }
   linkNavigation();
@@ -275,36 +326,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   const updatePage = async (url = '/') => {
     // cek internet connection
-    !navigator.onLine && location.reload();
+    // !navigator.onLine && location.reload();
     //reset cursor
     url !== '/' && cursorContainerGsapEffect();
 
-    return await window
-      .fetch(url)
-      .then(async (res) => {
-        const container = document.createElement('html');
-        const text = await res.text();
-        container.innerHTML = text;
+    const _targetMain = document.querySelector('main');
+    const res = await getPage(url);
+    if (res.status == 200) {
+      const _newMain = res.page;
+      const _newMainId = _newMain.getAttribute('id') ?? '';
 
-        const _targetMain = document.querySelector('main');
-        const _main = container.querySelector('main');
-        const _mainId = _main.getAttribute('id');
+      ////Change MAIN Component
+      //before
+      TransitionPage.out();
+      //enter
+      setTimeout(() => {
+        _targetMain.innerHTML = _newMain.innerHTML;
+        _targetMain.setAttribute('id', _newMainId ?? '');
 
-        //Change MAIN Component
-        TransitionPage.out();
-        setTimeout(() => {
-          _targetMain.innerHTML = _main.innerHTML;
-          _targetMain.setAttribute('id', _mainId ?? '');
-
-          TransitionPage.in();
-          lenis.scrollTo(0.0001);
-          sliderPortfolio();
-          linkNavigation();
-          cursorEffect();
-        }, 300);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+        //after
+        TransitionPage.in();
+        lenis.scrollTo(0.0001);
+        sliderPortfolio();
+        linkNavigation();
+        cursorEffect();
+      }, 300);
+    } else {
+      _targetMain.innerHTML = `<h1>${res.status}</h1>`;
+    }
   };
 });
