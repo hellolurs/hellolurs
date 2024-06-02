@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   sliderPortfolio();
 
-  // gsap code here!
+  ////++++++++++CURSOR EFFFECT++++++++++
   const cursor = document.querySelector('.cursor');
   const cursorContainer = cursor.querySelector('.container');
 
@@ -233,6 +233,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   ////++++++++++SINGGLE PAGE APPLICATION++++++++++
   let CachePageRoutesData = {};
+  let CachePageScrollPosition = {};
+
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
 
   const TransitionPage = {
     in: () => {
@@ -305,6 +310,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       link.onclick = async (e) => {
         e.preventDefault();
 
+        //save scroll position history
+        window.location.pathname == '/' &&
+          (CachePageScrollPosition = {
+            '/': window.scrollY ? window.scrollY : 1,
+          });
+
         const url = link.getAttribute('href');
         window.history.pushState(null, '', url);
         // console.log(CachePageRoutesData[url]);
@@ -337,20 +348,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const _newMainId = _newMain.getAttribute('id') ?? '';
 
       ////Change MAIN Component
-      //before
+      ////before
       TransitionPage.out();
-      //enter
+      ////enter
       setTimeout(() => {
         _targetMain.innerHTML = _newMain.innerHTML;
         _targetMain.setAttribute('id', _newMainId ?? '');
 
-        //after
+        //scroll restoration
+        url !== '/'
+          ? lenis.scrollTo(0, {immediate: true})
+          : window.scrollTo(0, CachePageScrollPosition['/']);
+
+        ////after
         TransitionPage.in();
-        lenis.scrollTo(0.0001);
         sliderPortfolio();
         linkNavigation();
         cursorEffect();
-      }, 300);
+      }, 800);
     } else {
       _targetMain.innerHTML = `<h1>${res.status}</h1>`;
     }
