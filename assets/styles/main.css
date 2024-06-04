@@ -89,7 +89,7 @@ body {
 }
 #hero .container .bg .c2 {
   right: 20%;
-  bottom: -240px;
+  bottom: -260px;
   width: 400px;
   height: 250px;
   opacity: 0.7;
@@ -97,6 +97,7 @@ body {
   background-color: #30C296;
   border-radius: 100%;
   box-shadow: 0 0 700px #30C296;
+  box-shadow: 0 -50px 700px #30C296;
 }
 #hero .container .bg .blur {
   position: absolute;
