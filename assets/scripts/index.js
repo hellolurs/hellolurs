@@ -2,8 +2,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const lenis = new Lenis();
 
-  lenis.scrollTo(0.0001);
-
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
@@ -16,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   lenis.on('scroll', (e) => {
     const scrollPos = e.animatedScroll;
     // console.log(e.animatedScroll);
-    const heroContainer = document.querySelector('#hero .container');
+    const heroContainer = document.querySelector('#hero .container>div');
     if (heroContainer) {
       if (window.innerWidth > 720) {
         gsap.to(heroContainer, {
