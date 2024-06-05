@@ -244,7 +244,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const _main = document.querySelector('main');
 
       gsap.to(_main, {
-        opacity: 1,
+        autoAlpha: 1,
+        // opacity: 1,
         onComplete: () => {
           _main.removeAttribute('style');
         },
@@ -254,7 +255,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const _main = document.querySelector('main');
 
       gsap.to(_main, {
-        opacity: 0,
+        autoAlpha: 0,
+        // opacity: 0,
         duration: 0.3,
       });
     },

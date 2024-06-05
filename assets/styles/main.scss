@@ -125,7 +125,7 @@ body {
 
             .c2 {
                 right: 20%;
-                bottom: -240px;
+                bottom: -260px;
                 width: 400px;
                 height: 250px;
                 // filter: blur(1.5rem);
@@ -135,6 +135,7 @@ body {
                 // animation-duration: 5s;
                 // // animation-timing-function: linear;
                 // animation-iteration-count: infinite;
+                box-shadow: 0 -50px 700px $accentColor;
             }
 
             .blur {
