@@ -26,6 +26,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
       }
     }
+    const portoHero = document.querySelector('#hero .porto');
+    const roleHero = document.querySelector('#hero .role');
+    portoHero &&
+      gsap.to(portoHero, {
+        y: -scrollPos / 8,
+      });
+
+    roleHero &&
+      gsap.to(roleHero, {
+        y: -scrollPos / 50,
+      });
   });
 
   window.addEventListener('scroll', (e) => {
@@ -349,6 +360,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       ////Change MAIN Component
       ////before
+      body.style.pointerEvents = 'none';
       TransitionPage.out();
       ////enter
       setTimeout(() => {
@@ -361,6 +373,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           : window.scrollTo(0, CachePageScrollPosition['/']);
 
         ////after
+        body.removeAttribute('style');
         TransitionPage.in();
         sliderPortfolio();
         linkNavigation();
